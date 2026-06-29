@@ -1,5 +1,7 @@
 # kotoba DSL core
 
+[![CI](https://github.com/kotoba-lang/dsl-core/actions/workflows/ci.yml/badge.svg)](https://github.com/kotoba-lang/dsl-core/actions/workflows/ci.yml)
+
 Shared, dependency-free `.cljc` helpers for small portable kotoba DSL libraries.
 
 Current surface:
