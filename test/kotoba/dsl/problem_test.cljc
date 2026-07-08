@@ -23,5 +23,5 @@
     (is (true? (problem/valid? :torch problems)))))
 
 (deftest rejects-invalid-severity
-  (is (thrown-with-msg? clojure.lang.ExceptionInfo #"Invalid problem severity"
+  (is (thrown-with-msg? #?(:clj clojure.lang.ExceptionInfo :cljs js/Error) #"Invalid problem severity"
                         (problem/problem :sc :info :note "x" "msg"))))
