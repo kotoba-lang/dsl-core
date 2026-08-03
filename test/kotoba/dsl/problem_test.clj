@@ -3,14 +3,15 @@
             [clojure.java.shell :as shell]
             [clojure.test :refer [deftest is testing]]
             [kotoba.compiler.core :as compiler]
-            [kotoba.compiler.ir :as ir]))
+            [kotoba.kir :as ir]))
 
 (def source (slurp "src/kotoba/dsl/problem.kotoba"))
 (defn call [kir function & args] (ir/execute kir function (vec args)))
 (defn dstr [value] ["string" value])
 (defn dkw [value] ["keyword" value])
 (defn dmap [entries]
-  ["map" (->> entries (sort-by (comp str key)) (mapv (fn [[key value]] [key value])))])
+  ["map" (->> entries (sort-by (comp str key))
+              (mapv (fn [[key value]] [(dkw key) value])))])
 (defn dvec [& values] ["vector" (vec values)])
 
 (deftest reference-preserves-validation-contract
