@@ -7,20 +7,16 @@
   (document-vector-assoc (document-vector) 0 (document-null)))
 
 (defn fail-keyword [] :keyword
-  (option-value-of [:option :keyword]
-    (document-keyword-value (fail-document)) :invalid))
+  (option-or (document-keyword-value (fail-document)) :invalid))
 
 (defn required-at [value :document index :i64] :document
-  (option-value-of [:option :document]
-    (document-vector-at value index) (fail-document)))
+  (option-or (document-vector-at value index) (fail-document)))
 
 (defn required-document [value :document key :keyword] :document
-  (option-value-of [:option :document]
-    (document-get value key) (fail-document)))
+  (option-or (document-get value key) (fail-document)))
 
 (defn required-keyword [value :document] :keyword
-  (option-value-of [:option :keyword]
-    (document-keyword-value value) (fail-keyword)))
+  (option-or (document-keyword-value value) (fail-keyword)))
 
 (defn severities [] [:set :keyword]
   (typed-set [:set :keyword] :error :warn))
