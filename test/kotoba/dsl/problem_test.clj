@@ -69,5 +69,12 @@
     (is (zero? (:exit probe)) (:err probe))))
 
 (deftest production-source-authority
-  (is (= ["src/kotoba/dsl/problem.kotoba"]
+  ;; ADR 0001 as amended 2026-08-13. The `.kotoba` is still the sole semantic
+  ;; authority — every conformance assertion above executes it, not the
+  ;; `.cljc`. What changed is that the `.cljc` is permitted to sit beside it as
+  ;; the load path, because no Clojure/ClojureScript/nbb loader can require a
+  ;; `.kotoba` and eleven consumer repos were unloadable for 17 days while this
+  ;; test enforced its absence (ADR-2608071000). Nothing else may appear here:
+  ;; a third file, or a second `.cljc`, is a fork of the authority.
+  (is (= ["src/kotoba/dsl/problem.cljc" "src/kotoba/dsl/problem.kotoba"]
          (->> (file-seq (io/file "src")) (filter #(.isFile %)) (map str) sort vec))))
