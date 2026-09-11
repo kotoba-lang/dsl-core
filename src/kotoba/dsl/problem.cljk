@@ -23,7 +23,7 @@
   `.cljc` only after consumers have a load path — so the `.cljc` comes back and
   stays until the guest itself is loadable.
 
-  The two are held in agreement by `test/kotoba/dsl/problem_parity_test.clj`,
+  The two are held in agreement by `test/kotoba/dsl/problem_parity_test.cljk`,
   which compiles the `.kotoba` and executes it through the KIR interpreter in
   the same JVM, then compares its typed documents against this namespace's EDN
   encoded into the same document form. Follows `kotoba-lang/css`, where

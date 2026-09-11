@@ -76,5 +76,5 @@
   ;; `.kotoba` and eleven consumer repos were unloadable for 17 days while this
   ;; test enforced its absence (ADR-2608071000). Nothing else may appear here:
   ;; a third file, or a second `.cljc`, is a fork of the authority.
-  (is (= ["src/kotoba/dsl/problem.cljc" "src/kotoba/dsl/problem.kotoba"]
+  (is (= ["src/kotoba/dsl/problem.cljk" "src/kotoba/dsl/problem.kotoba"]
          (->> (file-seq (io/file "src")) (filter #(.isFile %)) (map str) sort vec))))
