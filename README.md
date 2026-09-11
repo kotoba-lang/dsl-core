@@ -18,5 +18,5 @@ This repo is intentionally small. Domain libraries such as `statechart`,
 semantics while sharing stable validation result conventions.
 
 ```sh
-clojure -M:test
+kbb -M:test
 ```
