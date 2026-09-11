@@ -4,7 +4,7 @@
  {:test {:extra-paths ["test"]
          ;; kotoba-lang/amu is a TEST-ONLY dependency, for the parity gate
          ;; that compiles src/kotoba/dsl/problem.kotoba and requires it to agree
-         ;; with src/kotoba/dsl/problem.cljc (ADR 0001 as amended, and
+         ;; with src/kotoba/dsl/problem.cljk (ADR 0001 as amended, and
          ;; ADR-2608130900 in com-junkawasaki/root). Consumers require only the
          ;; .cljc and must not be made to drag the compiler in behind it —
          ;; kotoba-lang/css sets the same boundary.

@@ -23,7 +23,7 @@ reference execution, restricted JavaScript, and instantiated typed Wasm.
 
 Everything above stands, with one sentence corrected: *sole production language
 source* was implemented as *sole file in `src/`*, and those are not the same
-claim. Removing `src/kotoba/dsl/problem.cljc` on 2026-07-21 did not make the
+claim. Removing `src/kotoba/dsl/problem.cljk` on 2026-07-21 did not make the
 `.kotoba` the thing consumers run. It made `kotoba.dsl.problem` **unloadable**,
 because no Clojure, ClojureScript or nbb loader can require a `.kotoba` file
 and nothing in this repo emitted one they could. Eleven repos
@@ -35,7 +35,7 @@ noticed, because this repo's CI is green — it drives the `.kotoba` through a
 JVM host, and it does not look at consumers. See `com-junkawasaki/root`
 ADR-2608071000 and ADR-2608130900.
 
-So `src/kotoba/dsl/problem.cljc` is restored, and the two files divide as
+So `src/kotoba/dsl/problem.cljk` is restored, and the two files divide as
 follows:
 
 - **`problem.kotoba` is the semantic authority.** It is what the typed-ABI,
@@ -45,7 +45,7 @@ follows:
 - **`problem.cljc` is the load path.** It exists because consumers must be able
   to `require` the namespace today, on runtimes that cannot load the guest.
 
-They are held in agreement by `test/kotoba/dsl/problem_parity_test.clj`, which
+They are held in agreement by `test/kotoba/dsl/problem_parity_test.cljk`, which
 compiles the `.kotoba` and runs it through the KIR interpreter in the same JVM,
 then compares its typed documents against the `.cljc` output encoded into the
 same document form. `kotoba-lang/compiler` is therefore a **test-only**

@@ -1,6 +1,6 @@
 (ns kotoba.dsl.problem-parity-test
   "Parity gate between `src/kotoba/dsl/problem.kotoba` (the semantic authority)
-  and `src/kotoba/dsl/problem.cljc` (the load path consumers require).
+  and `src/kotoba/dsl/problem.cljk` (the load path consumers require).
 
   Shape follows `kotoba-lang/css` (`css.kotoba-parity-test`, ADR-2607270100
   §10): the `.kotoba` is compiled here and executed through the KIR interpreter
