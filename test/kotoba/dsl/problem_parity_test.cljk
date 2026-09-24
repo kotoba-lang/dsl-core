@@ -23,7 +23,7 @@
   not as `both throw the same thing`: the guest fails closed by trapping and
   surfaces as `ExceptionInfo` at the execution boundary, while the `.cljc`
   throws `ex-info` directly."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [kotoba.compiler.core :as compiler]
             [kotoba.kir :as ir]
             [kotoba.dsl.problem :as problem]))
