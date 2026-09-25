@@ -23,7 +23,7 @@
   not as `both throw the same thing`: the guest fails closed by trapping and
   surfaces as `ExceptionInfo` at the execution boundary, while the `.cljc`
   throws `ex-info` directly."
-  (:require [kotoba.test :refer [deftest is testing]]
+  (:require [kotoba.lang.error :as kerror] [kotoba.test :refer [deftest is testing]]
             [kotoba.compiler.core :as compiler]
             [kotoba.kir :as ir]
             [kotoba.dsl.problem :as problem]))
@@ -148,19 +148,19 @@
 (deftest both-refuse-an-unsupported-severity
   (doseq [bad [:info :fatal :debug :Error :warning]]
     (testing (str bad)
-      (is (thrown? clojure.lang.ExceptionInfo
+      (is (thrown? kerror/ExceptionInfo
                    (problem/problem :sc bad :note "x" "msg")))
-      (is (thrown? clojure.lang.ExceptionInfo
+      (is (thrown? kerror/ExceptionInfo
                    (call 'problem :sc bad :note (->doc "x") "msg")))
-      (is (thrown? clojure.lang.ExceptionInfo
+      (is (thrown? kerror/ExceptionInfo
                    (problem/problem-field :sc bad :note [:path "x"] "msg")))
-      (is (thrown? clojure.lang.ExceptionInfo
+      (is (thrown? kerror/ExceptionInfo
                    (call 'problem-field :sc bad :note (->doc [:path "x"]) "msg"))))))
 
 (deftest both-refuse-a-problem-with-no-severity-field
   (let [malformed {:sc/code :bad :sc/msg "no severity here"}]
-    (is (thrown? clojure.lang.ExceptionInfo (problem/severity :sc malformed)))
-    (is (thrown? clojure.lang.ExceptionInfo (call 'severity :sc (->doc malformed))))
+    (is (thrown? kerror/ExceptionInfo (problem/severity :sc malformed)))
+    (is (thrown? kerror/ExceptionInfo (call 'severity :sc (->doc malformed))))
     (testing "but the predicates report false rather than failing, on both sides"
       (is (false? (problem/error? :sc malformed)))
       (is (false? (call 'error? :sc (->doc malformed))))
